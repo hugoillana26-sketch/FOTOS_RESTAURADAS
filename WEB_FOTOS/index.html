@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revela — Restauración y colorización de fotos antiguas con IA</title>
+<meta name="description" content="Restaura, coloriza y mejora la calidad de tus fotos familiares con IA. Recupera recuerdos que se estaban perdiendo.">
+
+<!-- Tipografías: Fraunces (titulares) + Inter (cuerpo/UI). Cámbialas aquí si quieres otra combinación. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">Revela</a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#demo">Pruébalo</a>
+      <a href="#precios">Precios</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a href="#demo" class="btn btn-primary btn-small">Prueba con tu foto</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <h1>Tus recuerdos<br>merecen volver<br>a la vida.</h1>
+        <p class="hero-sub">Restauramos, coloreamos y mejoramos la calidad de tus fotos familiares en segundos, con inteligencia artificial.</p>
+        <a href="#demo" class="btn btn-primary">Prueba con tu foto</a>
+      </div>
+
+      <!-- Slider de ejemplo fijo, solo de muestra visual (usa tus propias fotos en /assets) -->
+      <div class="hero-demo">
+        <div class="ba-slider" data-ba-slider>
+          <div class="ba-slider__after">
+            <img src="assets/demo-after.jpg" alt="Foto familiar restaurada y coloreada">
+          </div>
+          <div class="ba-slider__before" data-ba-before-panel>
+            <img src="assets/demo-before.jpg" alt="Foto familiar antigua, dañada y en blanco y negro">
+          </div>
+          <input type="range" min="0" max="100" value="50" class="ba-slider__range" data-ba-range aria-label="Deslizar para comparar antes y después">
+          <div class="ba-slider__handle" data-ba-handle aria-hidden="true">
+            <span></span>
+          </div>
+          <span class="ba-slider__tag ba-slider__tag--before">Antes</span>
+          <span class="ba-slider__tag ba-slider__tag--after">Después</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO FUNCIONA ============ -->
+  <section class="how" id="como-funciona">
+    <div class="wrap">
+      <h2>Cómo funciona</h2>
+      <p class="section-lead">Sin conocimientos técnicos. Sin instalar nada.</p>
+
+      <ol class="filmstrip">
+        <li class="frame">
+          <span class="frame-number">1</span>
+          <h3>Sube tu foto</h3>
+          <p>Da igual su estado: rota, borrosa, amarillenta o en blanco y negro.</p>
+        </li>
+        <li class="frame">
+          <span class="frame-number">2</span>
+          <h3>La IA analiza cada detalle</h3>
+          <p>Rostros, texturas y los colores más probables de la época.</p>
+        </li>
+        <li class="frame">
+          <span class="frame-number">3</span>
+          <h3>Recíbela transformada</h3>
+          <p>En segundos, con más nitidez, color y calidad.</p>
+        </li>
+        <li class="frame">
+          <span class="frame-number">4</span>
+          <h3>Descárgala o pide el vídeo</h3>
+          <p>En alta resolución, lista para imprimir o compartir.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ DEMO INTERACTIVA ============ -->
+  <section class="demo" id="demo">
+    <div class="wrap">
+      <h2>Pruébalo con tu propia foto</h2>
+      <p class="section-lead">Sube una foto familiar y compara el resultado tú mismo.</p>
+
+      <div class="demo-panel">
+
+        <!-- Zona de subida -->
+        <div class="uploader" data-uploader>
+          <input type="file" id="photo-input" accept="image/*" class="uploader__input" data-uploader-input>
+          <label for="photo-input" class="uploader__dropzone" data-dropzone>
+            <span class="uploader__icon" aria-hidden="true">＋</span>
+            <span class="uploader__text">Arrastra tu foto aquí o haz clic para elegirla</span>
+            <span class="uploader__hint">JPG o PNG. Tu foto no se guarda en ningún servidor.</span>
+          </label>
+        </div>
+
+        <!-- Resultado: aparece tras subir una foto -->
+        <div class="demo-result" data-demo-result hidden>
+          <div class="ba-slider" data-ba-slider>
+            <div class="ba-slider__after" data-result-after>
+              <!-- La imagen procesada se inserta aquí por JS -->
+            </div>
+            <div class="ba-slider__before" data-ba-before-panel data-result-before>
+              <!-- La foto original subida se inserta aquí por JS -->
+            </div>
+            <input type="range" min="0" max="100" value="50" class="ba-slider__range" data-ba-range aria-label="Deslizar para comparar antes y después">
+            <div class="ba-slider__handle" data-ba-handle aria-hidden="true">
+              <span></span>
+            </div>
+            <span class="ba-slider__tag ba-slider__tag--before">Antes</span>
+            <span class="ba-slider__tag ba-slider__tag--after">Después</span>
+          </div>
+
+          <div class="demo-status" data-demo-status aria-live="polite"></div>
+
+          <div class="demo-actions">
+            <button type="button" class="btn btn-secondary" data-demo-reset>Probar con otra foto</button>
+            <a href="#precios" class="btn btn-primary">Ver precios para descargar en alta calidad</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOQUE EMOTIVO ============ -->
+  <section class="memory-block">
+    <div class="wrap memory-block__inner">
+      <p class="memory-line">Hay una carrera silenciosa que lleva décadas corriendo.</p>
+      <p class="memory-line">En un cajón, en una caja de zapatos, en el fondo de un álbum que ya casi nadie abre.</p>
+      <p class="memory-line memory-line--fact">
+        Las fotografías en color empiezan a mostrar decoloración visible entre 20 y 50 años después de su revelado, según investigaciones del Image Permanence Institute (Rochester Institute of Technology) — mientras que las copias en blanco y negro pueden aguantar más de un siglo en esas mismas condiciones.
+      </p>
+      <p class="memory-line">Eso significa que, ahora mismo, hay fotos de tu familia perdiendo color sin que nadie lo note.</p>
+      <p class="memory-line">Cada año que pasa, se apagan un poco más.</p>
+      <p class="memory-line memory-line--cta">Hoy todavía estás a tiempo de recuperarlas.</p>
+    </div>
+  </section>
+
+  <!-- ============ PRECIOS ============ -->
+  <section class="pricing" id="precios">
+    <div class="wrap">
+      <h2>Precios y packs</h2>
+      <p class="section-lead">Paga por foto o ahorra con un pack para todo el álbum.</p>
+
+      <div class="price-stack">
+
+        <article class="price-card">
+          <h3>Pack Color</h3>
+          <p class="price-card__desc">Colorización realista de tus fotos en blanco y negro.</p>
+          <p class="price-card__amount">4,99&nbsp;€ <span>/ foto</span></p>
+          <ul class="price-card__features">
+            <li>Colorización con IA</li>
+            <li>Descarga en alta resolución</li>
+            <li>Entrega en menos de 5 minutos</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Elegir Pack Color</a>
+        </article>
+
+        <article class="price-card">
+          <h3>Pack Calidad</h3>
+          <p class="price-card__desc">Reparación de daños y mejora de resolución.</p>
+          <p class="price-card__amount">4,99&nbsp;€ <span>/ foto</span></p>
+          <ul class="price-card__features">
+            <li>Reparación de arañazos y roturas</li>
+            <li>Mejora de nitidez y resolución</li>
+            <li>Descarga en alta resolución</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Elegir Pack Calidad</a>
+        </article>
+
+        <article class="price-card price-card--featured">
+          <span class="price-card__badge">El más elegido</span>
+          <h3>Pack Completo</h3>
+          <p class="price-card__desc">Color + calidad + versión animada en vídeo.</p>
+          <p class="price-card__amount">7,99&nbsp;€ <span>/ foto</span></p>
+          <ul class="price-card__features">
+            <li>Colorización con IA</li>
+            <li>Reparación y mejora de resolución</li>
+            <li>Vídeo cinematográfico del resultado</li>
+            <li>Descarga en alta resolución</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Elegir Pack Completo</a>
+        </article>
+
+      </div>
+
+      <p class="price-note">¿Tienes un álbum entero? Escríbenos y te preparamos un precio por lote.</p>
+    </div>
+  </section>
+
+  <!-- ============ PREGUNTAS FRECUENTES ============ -->
+  <section class="faq" id="preguntas">
+    <div class="wrap">
+      <h2>Preguntas frecuentes</h2>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>¿Es seguro subir mis fotos?</summary>
+          <p>Sí. Tus fotos se usan únicamente para procesarlas y no se comparten con terceros.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cuánto tarda el proceso?</summary>
+          <p>Normalmente entre unos segundos y pocos minutos, dependiendo del estado de la foto.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Qué pasa si mi foto está muy dañada?</summary>
+          <p>Nuestra IA está entrenada para trabajar incluso con roturas, manchas y arañazos importantes. En casos extremos, te lo indicaremos antes de cobrarte.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿En qué formatos puedo descargar el resultado?</summary>
+          <p>JPG en alta resolución, y vídeo MP4 si eliges el Pack Completo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="final-cta">
+    <div class="wrap">
+      <h2>Empieza a recuperar tu historia</h2>
+      <a href="#demo" class="btn btn-primary btn-large">Prueba con tu foto ahora</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span class="logo logo--footer">Revela</span>
+    <p>&copy; 2026 Revela. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
