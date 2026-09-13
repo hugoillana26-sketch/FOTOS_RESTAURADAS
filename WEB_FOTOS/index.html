@@ -6,10 +6,10 @@
 <title>Revela — Restauración y colorización de fotos antiguas con IA</title>
 <meta name="description" content="Restaura, coloriza y mejora la calidad de tus fotos familiares con IA. Recupera recuerdos que se estaban perdiendo.">
 
-<!-- Tipografías: Fraunces (titulares) + Inter (cuerpo/UI). Cámbialas aquí si quieres otra combinación. -->
+<!-- Tipografías: Space Grotesk (titulares, moderna y con carácter) + Inter (cuerpo/UI). Cámbialas aquí si quieres otra combinación. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -22,10 +22,18 @@
     <nav class="main-nav" aria-label="Navegación principal">
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#demo">Pruébalo</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="#creditos">Créditos gratis</a>
       <a href="#precios">Precios</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
-    <a href="#demo" class="btn btn-primary btn-small">Prueba con tu foto</a>
+    <div class="header-actions">
+      <button type="button" class="credit-pill" data-credit-pill title="Tus créditos">
+        <span class="credit-pill__icon" aria-hidden="true">✦</span>
+        <span data-credit-amount>0</span>
+      </button>
+      <a href="#demo" class="btn btn-primary btn-small">Prueba con tu foto</a>
+    </div>
   </div>
 </header>
 
@@ -40,14 +48,27 @@
         <a href="#demo" class="btn btn-primary">Prueba con tu foto</a>
       </div>
 
-      <!-- Slider de ejemplo fijo, solo de muestra visual (usa tus propias fotos en /assets) -->
+      <!--
+        Slider de ejemplo fijo, solo de muestra visual.
+        Usamos LA MISMA foto en los dos paneles (misma estructura, tal y como pediste)
+        y el efecto "antiguo" del panel de la izquierda es 100% CSS: un filtro en
+        blanco y negro/sepia + una textura de arañazos y viñeta superpuesta
+        (assets/aged-overlay.png). No hay dos fotos distintas, es una sola.
+
+        FOTO DE MUESTRA: por ahora usamos una foto de stock gratuita de Unsplash
+        (licencia Unsplash, uso comercial libre, sin atribución obligatoria):
+        https://unsplash.com/photos/a-happy-family-poses-for-a-photo-e__GG0ml864
+        Para producción, descárgala tú mismo desde ese enlace y guárdala como
+        assets/familia-demo.jpg, y cambia la ruta de abajo por "assets/familia-demo.jpg".
+      -->
       <div class="hero-demo">
         <div class="ba-slider" data-ba-slider>
           <div class="ba-slider__after">
-            <img src="assets/demo-after.jpg" alt="Foto familiar restaurada y coloreada">
+            <img src="https://images.unsplash.com/photo-1742750278106-c9c075cc97f2?auto=format&amp;fit=crop&amp;w=800&amp;h=1000&amp;q=80" alt="Foto familiar restaurada y coloreada" class="photo-restored">
           </div>
           <div class="ba-slider__before" data-ba-before-panel>
-            <img src="assets/demo-before.jpg" alt="Foto familiar antigua, dañada y en blanco y negro">
+            <img src="https://images.unsplash.com/photo-1742750278106-c9c075cc97f2?auto=format&amp;fit=crop&amp;w=800&amp;h=1000&amp;q=80" alt="Foto familiar antigua, dañada y en blanco y negro" class="photo-vintage">
+            <div class="photo-vintage__overlay" aria-hidden="true"></div>
           </div>
           <input type="range" min="0" max="100" value="50" class="ba-slider__range" data-ba-range aria-label="Deslizar para comparar antes y después">
           <div class="ba-slider__handle" data-ba-handle aria-hidden="true">
@@ -67,22 +88,22 @@
       <p class="section-lead">Sin conocimientos técnicos. Sin instalar nada.</p>
 
       <ol class="filmstrip">
-        <li class="frame">
+        <li class="frame" data-reveal>
           <span class="frame-number">1</span>
           <h3>Sube tu foto</h3>
           <p>Da igual su estado: rota, borrosa, amarillenta o en blanco y negro.</p>
         </li>
-        <li class="frame">
+        <li class="frame" data-reveal>
           <span class="frame-number">2</span>
           <h3>La IA analiza cada detalle</h3>
           <p>Rostros, texturas y los colores más probables de la época.</p>
         </li>
-        <li class="frame">
+        <li class="frame" data-reveal>
           <span class="frame-number">3</span>
           <h3>Recíbela transformada</h3>
           <p>En segundos, con más nitidez, color y calidad.</p>
         </li>
-        <li class="frame">
+        <li class="frame" data-reveal>
           <span class="frame-number">4</span>
           <h3>Descárgala o pide el vídeo</h3>
           <p>En alta resolución, lista para imprimir o compartir.</p>
@@ -140,7 +161,7 @@
 
   <!-- ============ BLOQUE EMOTIVO ============ -->
   <section class="memory-block">
-    <div class="wrap memory-block__inner">
+    <div class="wrap memory-block__inner" data-reveal-sequence>
       <p class="memory-line">Hay una carrera silenciosa que lleva décadas corriendo.</p>
       <p class="memory-line">En un cajón, en una caja de zapatos, en el fondo de un álbum que ya casi nadie abre.</p>
       <p class="memory-line memory-line--fact">
@@ -152,48 +173,160 @@
     </div>
   </section>
 
+  <!-- ============ RESEÑAS ============ -->
+  <section class="reviews" id="resenas">
+    <div class="wrap">
+      <h2>Lo que dicen quienes ya han recuperado sus recuerdos</h2>
+      <p class="section-lead">
+        Estas son reseñas de ejemplo para el diseño de la web — sustitúyelas por las de tus clientes reales antes de publicarla. Presentar testimonios inventados como si fueran reales podría considerarse publicidad engañosa.
+      </p>
+
+      <div class="review-grid">
+        <article class="review-card" data-reveal>
+          <img class="review-card__avatar" src="https://randomuser.me/api/portraits/women/68.jpg" alt="" loading="lazy">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__text">Subí una foto de mi abuela de los años 60 que estaba prácticamente ilegible por la humedad. Cuando vi el resultado en color se me saltaron las lágrimas, es ella otra vez.</p>
+          <p class="review-card__name">Marisa Ortega</p>
+        </article>
+
+        <article class="review-card" data-reveal>
+          <img class="review-card__avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="" loading="lazy">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__text">Tenía dudas porque parecía demasiado bueno para ser verdad, pero el resultado con mi foto de boda de mis padres quedó espectacular. Rapidísimo además.</p>
+          <p class="review-card__name">Javier Muñoz</p>
+        </article>
+
+        <article class="review-card" data-reveal>
+          <img class="review-card__avatar" src="https://randomuser.me/api/portraits/women/21.jpg" alt="" loading="lazy">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__text">Regalé a mi madre el álbum familiar restaurado por su cumpleaños. No paró de llorar de la emoción durante toda la tarde. El mejor regalo que le he hecho nunca.</p>
+          <p class="review-card__name">Carmen Ibáñez</p>
+        </article>
+
+        <article class="review-card" data-reveal>
+          <img class="review-card__avatar" src="https://randomuser.me/api/portraits/men/76.jpg" alt="" loading="lazy">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__text">La versión en vídeo de la foto de mi abuelo con el barco fue un puntazo, la puse en el homenaje que le hicimos y todos se quedaron sin palabras.</p>
+          <p class="review-card__name">Diego Salcedo</p>
+        </article>
+
+        <article class="review-card" data-reveal>
+          <img class="review-card__avatar" src="https://randomuser.me/api/portraits/women/50.jpg" alt="" loading="lazy">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__text">Tenía una foto rota por la mitad y con moho en una esquina. Pensé que no tenía arreglo. En unos minutos la recuperaron casi perfecta.</p>
+          <p class="review-card__name">Lucía Fernández</p>
+        </article>
+
+        <article class="review-card" data-reveal>
+          <img class="review-card__avatar" src="https://randomuser.me/api/portraits/men/61.jpg" alt="" loading="lazy">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__text">Uso los créditos diarios para ir restaurando poco a poco todo el álbum de mi padre. Es un proceso bonito, casi terapéutico.</p>
+          <p class="review-card__name">Antonio Reyes</p>
+        </article>
+
+        <article class="review-card" data-reveal>
+          <img class="review-card__avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="" loading="lazy">
+          <div class="review-card__stars" aria-hidden="true">★★★★★</div>
+          <p class="review-card__text">Lo probé por curiosidad con una foto antigua de mi pueblo y ahora estoy restaurando todo el archivo del ayuntamiento. Una pasada de herramienta.</p>
+          <p class="review-card__name">Elena Castillo</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONSIGUE CRÉDITOS GRATIS ============ -->
+  <section class="earn-credits" id="creditos">
+    <div class="wrap">
+      <h2>Consigue créditos gratis</h2>
+      <p class="section-lead">Usa los créditos para colorizar, mejorar calidad o convertir tus fotos a vídeo.</p>
+
+      <div class="earn-grid">
+        <div class="earn-card" data-reveal>
+          <h3>Bono de bienvenida</h3>
+          <p>500 créditos gratis solo por empezar a usar Revela.</p>
+          <p class="earn-card__amount">+500</p>
+        </div>
+
+        <div class="earn-card" data-reveal>
+          <h3>Bono diario</h3>
+          <p>Vuelve cada día y reclama tus créditos gratuitos.</p>
+          <p class="earn-card__amount">+150 / día</p>
+          <button type="button" class="btn btn-primary" data-daily-claim>Reclamar bono de hoy</button>
+        </div>
+
+        <div class="earn-card earn-card--wheel" data-reveal>
+          <h3>Ruleta de la suerte</h3>
+          <p>Gira una vez al día y gana entre 10 y 200 créditos.</p>
+
+          <div class="wheel-wrap">
+            <div class="wheel" data-wheel>
+              <!-- Los 8 sectores de la ruleta se generan con conic-gradient en el CSS -->
+              <ul class="wheel__labels" aria-hidden="true">
+                <li>10</li><li>25</li><li>50</li><li>75</li>
+                <li>100</li><li>150</li><li>200</li><li>20</li>
+              </ul>
+            </div>
+            <div class="wheel__pointer" aria-hidden="true"></div>
+          </div>
+
+          <button type="button" class="btn btn-secondary" data-wheel-spin>Girar la ruleta</button>
+          <p class="wheel__result" data-wheel-result aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PRECIOS ============ -->
   <section class="pricing" id="precios">
     <div class="wrap">
       <h2>Precios y packs</h2>
-      <p class="section-lead">Paga por foto o ahorra con un pack para todo el álbum.</p>
+      <p class="section-lead">Un único sistema de créditos para las tres acciones. Consíguelos gratis o cómpralos en packs.</p>
 
-      <div class="price-stack">
+      <h3 class="pricing-subhead">¿Cuánto cuesta cada acción?</h3>
+      <div class="cost-row">
+        <div class="cost-card" data-reveal>
+          <p class="cost-card__label">Poner color</p>
+          <p class="cost-card__amount">30 <span>créditos</span></p>
+        </div>
+        <div class="cost-card" data-reveal>
+          <p class="cost-card__label">Mejorar calidad</p>
+          <p class="cost-card__amount">20 <span>créditos</span></p>
+        </div>
+        <div class="cost-card" data-reveal>
+          <p class="cost-card__label">Convertir a vídeo</p>
+          <p class="cost-card__amount">100 <span>créditos</span></p>
+        </div>
+      </div>
+
+      <h3 class="pricing-subhead">Consigue créditos</h3>
+      <p class="section-lead">
+        Los precios (4,99&nbsp;€ y 7,99&nbsp;€) se mantienen igual que antes — ahora la diferencia es cuántos créditos recibes por ellos. He puesto una cantidad orientativa: edítala en el objeto <code>CONFIG</code> al principio de js/main.js.
+      </p>
+      <div class="price-stack price-stack--two">
 
         <article class="price-card">
-          <h3>Pack Color</h3>
-          <p class="price-card__desc">Colorización realista de tus fotos en blanco y negro.</p>
-          <p class="price-card__amount">4,99&nbsp;€ <span>/ foto</span></p>
+          <h3>Pack Básico</h3>
+          <p class="price-card__desc">Ideal para probar con algunas fotos sueltas.</p>
+          <p class="price-card__amount">4,99&nbsp;€ <span>/ pack</span></p>
+          <p class="price-card__credits">300 créditos</p>
           <ul class="price-card__features">
-            <li>Colorización con IA</li>
-            <li>Descarga en alta resolución</li>
-            <li>Entrega en menos de 5 minutos</li>
+            <li>≈ 10 colorizaciones</li>
+            <li>≈ 15 mejoras de calidad</li>
+            <li>≈ 3 vídeos</li>
           </ul>
-          <a href="#" class="btn btn-secondary">Elegir Pack Color</a>
-        </article>
-
-        <article class="price-card">
-          <h3>Pack Calidad</h3>
-          <p class="price-card__desc">Reparación de daños y mejora de resolución.</p>
-          <p class="price-card__amount">4,99&nbsp;€ <span>/ foto</span></p>
-          <ul class="price-card__features">
-            <li>Reparación de arañazos y roturas</li>
-            <li>Mejora de nitidez y resolución</li>
-            <li>Descarga en alta resolución</li>
-          </ul>
-          <a href="#" class="btn btn-secondary">Elegir Pack Calidad</a>
+          <a href="#" class="btn btn-secondary">Elegir Pack Básico</a>
         </article>
 
         <article class="price-card price-card--featured">
-          <span class="price-card__badge">El más elegido</span>
+          <span class="price-card__badge">Mejor precio por crédito</span>
           <h3>Pack Completo</h3>
-          <p class="price-card__desc">Color + calidad + versión animada en vídeo.</p>
-          <p class="price-card__amount">7,99&nbsp;€ <span>/ foto</span></p>
+          <p class="price-card__desc">Para restaurar un álbum familiar entero.</p>
+          <p class="price-card__amount">7,99&nbsp;€ <span>/ pack</span></p>
+          <p class="price-card__credits">600 créditos</p>
           <ul class="price-card__features">
-            <li>Colorización con IA</li>
-            <li>Reparación y mejora de resolución</li>
-            <li>Vídeo cinematográfico del resultado</li>
-            <li>Descarga en alta resolución</li>
+            <li>≈ 20 colorizaciones</li>
+            <li>≈ 30 mejoras de calidad</li>
+            <li>≈ 6 vídeos</li>
           </ul>
           <a href="#" class="btn btn-primary">Elegir Pack Completo</a>
         </article>
